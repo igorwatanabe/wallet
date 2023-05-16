@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchApi } from '../redux/actions';
+import { fetchApi, fetchApiExpenses } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
+    id: 0,
     value: '',
     description: '',
-    method: '',
-    tag: '',
+    currency: 'USD',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
   };
 
   componentDidMount() {
@@ -24,8 +26,31 @@ class WalletForm extends Component {
     });
   };
 
+  handleSubmit = () => {
+    const { dispatch } = this.props;
+    const { id, value, description, method, tag, currency } = this.state;
+    const expenses = {
+      id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+    dispatch(fetchApiExpenses(expenses));
+    this.setState((state) => ({
+      id: state.id + 1,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    }));
+  };
+
   render() {
     const {
+      id,
       value,
       description,
       method,
@@ -37,6 +62,10 @@ class WalletForm extends Component {
       <>
         <div>WalletForm</div>
         <form>
+          <label>
+            ID:
+            { id }
+          </label>
           <label htmlFor="value">
             Valor:
             <input
@@ -107,6 +136,13 @@ class WalletForm extends Component {
               <option>Saúde</option>
             </select>
           </label>
+          <button
+            type="button"
+            // disabled={ disabled }
+            onClick={ this.handleSubmit }
+          >
+            Adicionar despesa
+          </button>
         </form>
       </>
     );
@@ -121,7 +157,6 @@ WalletForm.propTypes = {
 };
 
 const mapStateToProps = (globalState) => ({
-  // console.log(globalState);
   wallet: globalState.wallet,
 });
 
