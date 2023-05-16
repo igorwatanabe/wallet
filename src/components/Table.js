@@ -41,20 +41,28 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-
-            {expenses.map((element, index) => (
+            {expenses.map(({
+              value,
+              description,
+              exchangeRates,
+              currency,
+              method,
+              tag,
+            }, index) => (
               <tr key={ index }>
-                {/* <td width="auto">{element.id}</td> */}
-                <td width="auto">{element.value}</td>
-                <td width="auto">{element.description}</td>
-                <td width="auto">{element.currency}</td>
-                <td width="auto">{element.method}</td>
-                <td width="auto">{element.tag}</td>
-                <td width="auto">{element.exchangeRates[element.currency].ask}</td>
+                {/* <td width="auto">{id}</td> */}
+                <td width="auto">{parseFloat(value).toFixed(2)}</td>
+                <td width="auto">{description}</td>
+                <td width="auto">{exchangeRates[currency].name}</td>
+                <td width="auto">{method}</td>
+                <td width="auto">{tag}</td>
                 <td width="auto">
-                  {element.exchangeRates[element.currency].ask * element.value}
+                  {parseFloat(exchangeRates[currency].ask).toFixed(2)}
                 </td>
-                <td width="auto">{element.exchangeRates[element.currency].codein}</td>
+                <td width="auto">
+                  {(exchangeRates[currency].ask * value).toFixed(2)}
+                </td>
+                <td width="auto">Real</td>
               </tr>
             ))}
           </tbody>
