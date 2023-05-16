@@ -28,20 +28,35 @@ class Table extends Component {
         <table border="1" width="500">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>value</th>
-              <th>description</th>
-              <th>currency</th>
-              <th>method</th>
-              <th>tag</th>
+              {/* <th>ID</th> */}
+              <th>Valor</th>
+              <th>Descrição</th>
+              <th>Moeda</th>
+              <th>Método de pagamento</th>
+              <th>Tag</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {Object.keys(expenses).map((element, index) => (
-                <td width="auto" key={ index }>{element}</td>
-              ))}
-            </tr>
+
+            {expenses.map((element, index) => (
+              <tr key={ index }>
+                {/* <td width="auto">{element.id}</td> */}
+                <td width="auto">{element.value}</td>
+                <td width="auto">{element.description}</td>
+                <td width="auto">{element.currency}</td>
+                <td width="auto">{element.method}</td>
+                <td width="auto">{element.tag}</td>
+                <td width="auto">{element.exchangeRates[element.currency].ask}</td>
+                <td width="auto">
+                  {element.exchangeRates[element.currency].ask * element.value}
+                </td>
+                <td width="auto">{element.exchangeRates[element.currency].codein}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>
