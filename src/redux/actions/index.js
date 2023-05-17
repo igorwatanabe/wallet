@@ -1,4 +1,4 @@
-import { ADD_EMAIL, NAME_COIN, ADD_EXPENSES } from './actionsTypes';
+import { ADD_EMAIL, NAME_COIN, ADD_EXPENSES, DELETE_EXPENSE } from './actionsTypes';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -31,3 +31,8 @@ export function fetchApiExpenses(expenses) {
     dispatch(getExpenses({ ...expenses, exchangeRates: { ...data } }));
   };
 }
+
+export const deleteExpense = (expense) => ({
+  type: DELETE_EXPENSE,
+  payload: expense,
+});

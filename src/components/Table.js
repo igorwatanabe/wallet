@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense } from '../redux/actions';
 
 class Table extends Component {
   // state = {
@@ -16,6 +17,13 @@ class Table extends Component {
   //     expenses: [...expenses, newExpense],
   //   });
   // };
+
+  deleteExpense = (id) => {
+    const { expenses, dispatch } = this.props;
+    const newExpenses = expenses.filter((element) => (Number(element.id) !== Number(id)));
+    console.log(newExpenses);
+    dispatch(deleteExpense(newExpenses));
+  };
 
   render() {
     console.log(this.props);
@@ -48,8 +56,9 @@ class Table extends Component {
               currency,
               method,
               tag,
-            }, index) => (
-              <tr key={ index }>
+              id,
+            }) => (
+              <tr key={ id }>
                 {/* <td width="auto">{id}</td> */}
                 <td width="auto">{parseFloat(value).toFixed(2)}</td>
                 <td width="auto">{description}</td>
@@ -63,6 +72,17 @@ class Table extends Component {
                   {(exchangeRates[currency].ask * value).toFixed(2)}
                 </td>
                 <td width="auto">Real</td>
+                <td width="auto">
+                  <button data-testid="edit-btn">Editar</button>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    id={ id }
+                    onClick={ () => this.deleteExpense(id) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -73,7 +93,8 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (globalState) => ({
