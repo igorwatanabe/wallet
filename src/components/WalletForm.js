@@ -88,7 +88,6 @@ class WalletForm extends Component {
     expenseEdit[0].currency = expense.currency;
     expenseEdit[0].method = expense.method;
     expenseEdit[0].tag = expense.tag;
-    console.log(expenseEdit);
 
     expenses.splice(Number(idToEdit), 1, expenseEdit[0]);
     dispatch(editExpenses(expenses));
@@ -180,7 +179,6 @@ class WalletForm extends Component {
             <select
               data-testid="tag-input"
               name="tag"
-              // id={ name }
               required
               onChange={ this.handleChange }
               value={ tag }

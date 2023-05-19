@@ -21,7 +21,6 @@ class Table extends Component {
   deleteExpense = (id) => {
     const { expenses, dispatch } = this.props;
     const newExpenses = expenses.filter((element) => (Number(element.id) !== Number(id)));
-    console.log(newExpenses);
     dispatch(deleteExpense(newExpenses));
   };
 
@@ -32,9 +31,6 @@ class Table extends Component {
   };
 
   render() {
-    console.log(this.props);
-    // const { id, value, description, currency, method, tag } = this.props;
-
     const { expenses } = this.props;
 
     return (
@@ -111,16 +107,7 @@ Table.propTypes = {
 };
 
 const mapStateToProps = (globalState) => ({
-  // console.log(globalState.user.email);
   expenses: globalState.wallet.expenses,
-
-  // id: globalState.wallet.expenses.id,
-  // value: globalState.wallet.expenses.value,
-  // description: globalState.wallet.expenses.description,
-  // currency: globalState.wallet.expenses.currency,
-  // method: globalState.wallet.expenses.method,
-  // tag: globalState.wallet.expenses.tag,
-  // ask: globalState.wallet.exchangeRates,
 });
 
 export default connect(mapStateToProps)(Table);

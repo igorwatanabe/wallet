@@ -1,7 +1,7 @@
 import {
   ADD_EMAIL,
   NAME_COIN,
-  ADD_EXPENSES,
+  ADD_EXPENSE,
   DELETE_EDIT_EXPENSE,
   EDIT_EXPENSE,
   ID_TO_EDIT,
@@ -26,8 +26,8 @@ export function fetchApi() {
   };
 }
 
-export const getExpenses = (expenses) => ({
-  type: ADD_EXPENSES,
+export const addExpense = (expenses) => ({
+  type: ADD_EXPENSE,
   payload: expenses,
 });
 
@@ -35,7 +35,7 @@ export function fetchApiExpenses(expense) {
   return async (dispatch) => {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const data = await response.json();
-    dispatch(getExpenses({ ...expense, exchangeRates: { ...data } }));
+    dispatch(addExpense({ ...expense, exchangeRates: { ...data } }));
   };
 }
 

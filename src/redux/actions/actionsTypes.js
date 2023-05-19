@@ -2,7 +2,7 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 
 export const NAME_COIN = 'NAME_COIN';
 
-export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
 
 export const DELETE_EDIT_EXPENSE = 'DELETE_EDIT_EXPENSE';
 

@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
   NAME_COIN,
-  ADD_EXPENSES,
+  ADD_EXPENSE,
   DELETE_EDIT_EXPENSE,
   EDIT_EXPENSE,
   ID_TO_EDIT,
@@ -19,7 +19,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case NAME_COIN:
     return { ...state, currencies: action.payload };
 
-  case ADD_EXPENSES:
+  case ADD_EXPENSE:
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
